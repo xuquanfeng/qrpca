@@ -128,6 +128,6 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 - Sharma A, Paliwal K K, Imoto S, et al. Principal component analysis using QR decomposition[J]. International Journal of Machine Learning and Cybernetics, 2013, 4(6): 679-683.
 
 ## Citing ``qrpca``
-f you want to cite ``qrpca``, please use the following citations.
+If you want to cite ``qrpca``, please use the following citations.
 
 Software Citation: Xu Quanfeng, & Rafael S. de Souza. (2022). PCA algorithm of QR accelerated SVD decomposition (1.1). Zenodo. https://doi.org/10.5281/zenodo.6362371
