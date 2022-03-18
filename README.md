@@ -1,12 +1,6 @@
 QRPCA
 =======
 
-.. image:: https://img.shields.io/pypi/v/qrpca
-   :target: https://pypi.org/project/qrpca/
-
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.6362371.svg
-   :target: https://doi.org/10.5281/zenodo.6362371
-
 A Python package for PCA algorithm of QR accelerated SVD decomposition with CUDA of torch.
 
 `QRPCA` is a package that uses singular value decomposition and QR decomposition to perform PCA dimensionality reduction. It takes the two-dimensional matrix data matrix as the input, trains the PCA dimensionality reduction matrix, and reduces the dimension of the test data according to the training data. This method can accelerate the operation with GPU in torch environment. Consequently, this package can be used as a simple toolbox to perform astronomical data cleaning.
