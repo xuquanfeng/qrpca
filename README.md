@@ -140,11 +140,11 @@ the shape of X_test after PCA: torch.Size([10000, 500])
 ```
 Comparison of PCA degradation time with different number of rows and different methods for the case of 1000 columns.
 
-<img src="qrpca_test/result.png" width="400">
+<img src="qrpca_test/result.png" width="600">
 
 Comparison of PCA reduction time with different number of columns and different methods for the case of 10000 rows.
 
-<img src="qrpca_test/result2.png" width="400">
+<img src="qrpca_test/result2.png" width="600">
 
 ## Requirements
 - numpy>=1.21.1
