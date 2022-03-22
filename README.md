@@ -144,7 +144,7 @@ Comparison of PCA degradation time with different number of rows and different m
 
 Comparison of PCA reduction time with different number of columns and different methods for the case of 10000 rows.
 
-<img src="qrpca_test/result2.png" width="600">
+<img src="qrpca_test/result1.png" width="600">
 
 ## Requirements
 - numpy>=1.21.1
