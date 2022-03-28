@@ -157,11 +157,11 @@ Then the result is as follows:
 
 Comparison of PCA degradation time with different number of rows and different methods for the case of 1000 columns.
 
-.. image:: https://github.com/pengchzn/yonder/blob/main/tests/figures/classification.png
+.. image:: https://github.com/xuquanfeng/qrpca/blob/v1.4/qrpca_test/result_1000.png
 
 Comparison of PCA reduction time with different number of columns and different methods for the case of 30000 rows.
 
-<img src="qrpca_test/3w_18_result.png" width="600">
+.. image:: https://github.com/xuquanfeng/qrpca/blob/v1.4/qrpca_test/3w_18_result.png
 
 
 Requirements
