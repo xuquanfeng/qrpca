@@ -12,7 +12,7 @@ pip install qrpca
 ```
 If you download the repository, you can also install it in the `QRPCA` directory:
 ```
-https://github.com/xuquanfeng/qrpca
+git clone https://github.com/xuquanfeng/qrpca
 ```
 You can access it by clicking on 
 [Github-QRPCA](https://github.com/xuquanfeng/qrpca)
