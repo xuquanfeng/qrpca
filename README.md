@@ -12,7 +12,7 @@ pip install qrpca
 ```
 If you download the repository, you can also install it in the `QRPCA` directory:
 ```
-https://github.com/xuquanfeng/qrpca/edit/qrpca
+https://github.com/xuquanfeng/qrpca
 ```
 You can access it by clicking on 
 [Github-QRPCA](https://github.com/xuquanfeng/qrpca)
@@ -156,7 +156,7 @@ Comparison of PCA reduction time with different number of columns and different 
 
 Use the dependent environment as above, `scikit-python` is the dependent package required to load test data.
 ## Copyright & License
-2022 Xu Quanfeng (xuquanfeng@shao.ac.cn) & Rafael S. de Souza (drsouza@shao.ac.cn)
+2022 Xu Quanfeng (xuquanfeng@shao.ac.cn) & Rafael S. de Souza (drsouza@shao.ac.cn) & Shen Shiyin (ssy@shao.ac.cn) & Peng Chen (pengchzn@gmail.com)
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
