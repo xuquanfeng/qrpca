@@ -130,4 +130,4 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 ## Citing ``qrpca``
 If you want to cite ``qrpca``, please use the following citations.
 
-Software Citation: Xu Quanfeng, & Rafael S. de Souza. (2022). PCA algorithm of QR accelerated SVD decomposition (1.1). Zenodo. https://doi.org/10.5281/zenodo.6362371
+Software Citation: Xu Quanfeng, Rafael S. de Souza, Shen Shiyin, & Peng Chen. (2022). qrpca: RNAAS Submission (1.4). Zenodo. https://doi.org/10.5281/zenodo.6390206
