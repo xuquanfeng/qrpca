@@ -3,8 +3,8 @@ QRPCA
 .. image:: https://img.shields.io/pypi/v/qrpca
    :target: https://pypi.org/project/qrpca/
 
-.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.6390206.svg
-   :target: https://doi.org/10.5281/zenodo.6390206
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.6417821.svg
+   :target: https://doi.org/10.5281/zenodo.6417821
 .. image:: https://img.shields.io/badge/build-passing-successw
 
 *A Python package for QR based PCA decomposition with CUDA acceleration via torch.*
