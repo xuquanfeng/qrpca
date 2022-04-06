@@ -1,8 +1,15 @@
 QRPCA
 =======
+.. image:: https://img.shields.io/pypi/v/qrpca
+   :target: https://pypi.org/project/qrpca/
 
+.. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.6390206.svg
+   :target: https://doi.org/10.5281/zenodo.6390206
+.. image:: https://img.shields.io/badge/build-passing-successw
 
 *A Python package for QR based PCA decomposition with CUDA acceleration via torch.*
+
+`You can get the docs here! <https://qrpca.readthedocs.io/en/stable/README.html>`_
 
 ``qrpca`` is a package that uses singular value decomposition and QR decomposition to perform PCA dimensionality reduction. It takes the two-dimensional matrix data matrix as the input, trains the PCA dimensionality reduction matrix, and reduces the dimension of the test data according to the training data. This method can accelerate the operation with GPU in torch environment. Consequently, this package can be used as a simple toolbox to perform astronomical data cleaning.
 
@@ -158,11 +165,11 @@ Then the result is as follows:
 
 Comparison of PCA degradation time with different number of rows and different methods for the case of 1000 columns.
 
-.. image:: /figure/result_1000.png
+.. image:: https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/result_1000.png
 
 Comparison of PCA reduction time with different number of columns and different methods for the case of 30000 rows.
 
-.. image:: /figure/3w_18_result.png
+.. image:: https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/3w_18_result.png
 
 
 Requirements
@@ -174,8 +181,6 @@ Requirements
 -  torchvision>=0.8.0
 -  cudatoolkit>=0.7.1
 -  scikit-learn>=1.0.2
-
-Use the dependent environment as above, ``scikit-python`` is the dependent package required to load test data.
 
 Copyright & License
 ===================
