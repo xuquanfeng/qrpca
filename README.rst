@@ -1,5 +1,5 @@
 QRPCA
-=======
+=====
 .. image:: https://img.shields.io/pypi/v/qrpca
    :target: https://pypi.org/project/qrpca/
 
@@ -14,7 +14,7 @@ QRPCA
 ``qrpca`` is a package that uses singular value decomposition and QR decomposition to perform PCA dimensionality reduction. It takes the two-dimensional matrix data matrix as the input, trains the PCA dimensionality reduction matrix, and reduces the dimension of the test data according to the training data. This method can accelerate the operation with GPU in torch environment. Consequently, this package can be used as a simple toolbox to perform astronomical data cleaning.
 
 How to install ``qrpca``
-==========================
+========================
 
 The ``qrpca`` can be installed by the PyPI and pip:
 
@@ -33,144 +33,93 @@ If you download the repository, you can also install it in the ``QRPCA`` directo
 You can access it by clicking on `Github-QRPCA <https://github.com/xuquanfeng/qrpca>`_
 
 How to use ``qrpca``
-======================
+====================
 
 Here is a demo for the use of `qrpca`.
 
 The following are the results of retaining principal components containing 95% of the information content by principal component analysis.
-Setting the parameter n_components to a decimal number less than 1 contains the results of the principal components that account for the amount of information in the total data n_components.
+
+
+You can set the parameter ``n_components`` to a value between 0 and 1 to execute the PCA on the corresponding proportion of the entire data, or set it to an integer number to reserve the ``n_omponents`` components.
 
 ::
 
-   import time
-   import numpy as np
-   from qrpca.decomposition import QRPCA
-   from qrpca.decomposition import SVDPCA
-   import torch
-   np.set_printoptions(suppress=True)
+    import torch
+    import numpy as np
+    from qrpca.decomposition import QRPCA
+    
+    # Generate the random data
+    demo_data = torch.rand(60000,2000)
+    n_com = 0.95
 
-   X_train = torch.rand(60000,2000)
-   X_test = torch.rand(10000,2000)
-   n_com = 0.95
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    # QRPCA
+    pca = QRPCA(n_component_ratio=n_com,device=device) # The percentage of information retained.
+    # pca = PCA(n_component_ratio=10) # n principal components are reserved.
+    demo_qrpca = pca.fit_transform(demo_data)
+    print(demo_pca)
+    
+    # SVDPCA
+    pca = SVDPCA(n_component_ratio=n_com,device=device)
+    demo_svdpca = pca.fit_transform(demo_data)
+    print(demo_svdpca)
 
-   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-   start_time = time.time()
-   pca = QRPCA(n_component_ratio=n_com,device=device)  #When the parameter here is decimal, it is the percentage of information retained.
-   # pca = PCA(n_component_ratio=10) #When the parameter is an integer, n principal components are reserved.
-   X_train_qrpca = pca.fit_transform(X_train)
-   X_test_qrpca=pca.transform(X_test)
-   pca_n=X_train_qrpca.shape[1]
-   print('='*10,'torch_QR','='*10)
-   print("keep {} features after pca \nthe shape of X_train after PCA: {} \nthe shape of X_test after PCA: {}".format(pca_n,X_train_qrpca.shape,X_test_qrpca.shape))
-   print(X_train_qrpca.device)
-   print("--- %s seconds ---" % (time.time() - start_time))
 
-   device = torch.device("cpu")
-   start_time = time.time()
-   pca = QRPCA(n_component_ratio=n_com,device=device)
-   X_train_qrpca = pca.fit_transform(X_train)
-   X_test_qrpca=pca.transform(X_test)
-   pca_n=X_train_qrpca.shape[1]
-   print('='*10,'torch_QR','='*10)
-   print("keep {} features after pca \nthe shape of X_train after PCA: {} \nthe shape of X_test after PCA: {}".format(pca_n,X_train_qrpca.shape,X_test_qrpca.shape))
-   print(X_train_qrpca.device)
-   print("--- %s seconds ---" % (time.time() - start_time))
+Why using ``qrpca``
+===================
 
-   device = torch.device("cpu")
-   start_time = time.time()
-   pca = SVDPCA(n_component_ratio=n_com,device=device)
-   # pca = PCA(n_component_ratio=10) #When the parameter is an integer, n principal components are reserved.
-   X_train_qrpca = pca.fit_transform(X_train)
-   X_test_qrpca=pca.transform(X_test)
-   pca_n=X_train_qrpca.shape[1]
-   print('='*10,'torch_SVD','='*10)
-   print("keep {} features after pca \nthe shape of X_train after PCA: {} \nthe shape of X_test after PCA: {}".format(pca_n,X_train_qrpca.shape,X_test_qrpca.shape))
-   print(X_train_qrpca.device)
-   print("--- %s seconds ---" % (time.time() - start_time))
+==========================
+Be very similar to sklearn
+==========================
 
-   from sklearn.decomposition import PCA
+The methods and usage of ``qrpca`` are almost identical to those of ``sklearn.decomposition.PCA``. If you want to switch from ``sklearn`` to ``qrpca``, all you have to do is change the import and declare the device if you have a GPU, and that's it.
 
-   start_time = time.time()
-   pca2 = PCA(n_components=n_com, copy=True, whiten=False)
-   X_train_pca2 = pca2.fit_transform(X_train)
-   X_test_pca2 = pca2.transform(X_test)
-   pca_n2 = X_train_pca2.shape[1]
-   print('='*10,'sklearn','='*10)
-   print("keep {} features after pca \nthe shape of X_train after PCA: {} \nthe shape of X_test after PCA: {}".format(pca_n,X_train_qrpca.shape,X_test_qrpca.shape))
-   print("--- %s seconds ---" % (time.time() - start_time))
+And here's an illustration of how minimal the change is when different ``PCA`` is used:
 
-Then the result is as follows:
-
+- qrpca.decomposition.QRPCA
 ::
 
-   ========== torch_QR ==========
-   keep 1860 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 1860]) 
-   the shape of X_test after PCA: torch.Size([10000, 1860])
-   cuda:0
-   --- 3.66221284866333 seconds ---
-   ========== torch_QR ==========
-   keep 1860 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 1860]) 
-   the shape of X_test after PCA: torch.Size([10000, 1860])
-   cpu
-   --- 8.777541637420654 seconds ---
-   ========== torch_SVD ==========
-   keep 1860 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 1860]) 
-   the shape of X_test after PCA: torch.Size([10000, 1860])
-   cpu
-   --- 9.32607626914978 seconds ---
-   ========== sklearn ==========
-   keep 1860 features after pca 
-   the shape of X_train after PCA: (60000, 1860) 
-   the shape of X_test after PCA: (10000, 1860)
-   --- 27.23160696029663 seconds ---
+    from qrpca.decomposition import QRPCA
+    
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    pca = QRPCA(n_component_ratio=n_com,device=device)
+    demo_qrpca = pca.fit_transform(demo_data)
 
-The following is the result of retaining principal components containing an integer number of information items by principal component analysis.
-Set the parameter n_components to an integer.
-
-Edit the parameters of the above code as follows:
-
+- qrpca.decomposition.SVDPCA
 ::
 
-   n_com = 500
-   
-Then the result is as follows:
+    from qrpca.decomposition import SVDPCA
+
+    pca = SVDPCA(n_component_ratio=n_com)
+    demo_qrpca = pca.fit_transform(demo_data)
+
+- sklearn.decomposition.PCA
 ::
 
-   ========== torch_QR ==========
-   keep 500 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 500]) 
-   the shape of X_test after PCA: torch.Size([10000, 500])
-   cuda:0
-   --- 3.5724520683288574 seconds ---
-   ========== torch_QR ==========
-   keep 500 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 500]) 
-   the shape of X_test after PCA: torch.Size([10000, 500])
-   cpu
-   --- 7.9796741008758545 seconds ---
-   ========== torch_SVD ==========
-   keep 500 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 500]) 
-   the shape of X_test after PCA: torch.Size([10000, 500])
-   cpu
-   --- 8.098357200622559 seconds ---
-   ========== sklearn ==========
-   keep 500 features after pca 
-   the shape of X_train after PCA: torch.Size([60000, 500]) 
-   the shape of X_test after PCA: torch.Size([10000, 500])
-   --- 15.316067457199097 seconds ---
+    from sklearn.decomposition import PCA
 
-Comparison of PCA degradation time with different number of rows and different methods for the case of 1000 columns.
+    pca = PCA(n_components=n_com)
+    demo_pca = pca.fit_transform(demo_data)
+
+
+=============================
+Much more faster than sklearn
+=============================
+
+With the acceleration of GPU computation, the speed of both QR decomposition and singular value decomposition in ``qrpca`` is much higher than that in ``sklearn``
+
+We run the different PCA methods on data with different numbers of rows and columns, and then we compare their PCA degradation times and plotted the distribution of the times. Here are the two plots.
+
+**Comparison of PCA degradation time with different number of rows and different methods for the case of 1000 columns.**
 
 .. image:: https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/result_1000.png
 
-Comparison of PCA reduction time with different number of columns and different methods for the case of 30000 rows.
+**Comparison of PCA reduction time with different number of columns and different methods for the case of 30000 rows.**
 
 .. image:: https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/3w_18_result.png
 
+
+We can see from the above two facts that ``qrpca`` may considerably cut program run time by using GPU acceleration, while also having a very cheap migration cost and a guaranteed impact.
 
 Requirements
 ============
@@ -197,7 +146,7 @@ References
 
 
 Citing ``qrpca``
-=================
+================
 
 If you want to cite ``qrpca``, please use the following citations.
 
