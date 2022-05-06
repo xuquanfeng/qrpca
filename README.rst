@@ -103,7 +103,7 @@ And here's an illustration of how minimal the change is when different ``PCA`` i
 
 
 =============================
-Much more faster than sklearn
+Performance benchmark sklearn
 =============================
 
 With the acceleration of GPU computation, the speed of both QR decomposition and singular value decomposition in ``qrpca`` is much higher than that in ``sklearn``
