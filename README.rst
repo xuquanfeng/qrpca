@@ -69,7 +69,7 @@ Why using ``qrpca``
 ===================
 
 ==========================
-Be very similar to sklearn
+Similar to sklearn
 ==========================
 
 The methods and usage of ``qrpca`` are almost identical to those of ``sklearn.decomposition.PCA``. If you want to switch from ``sklearn`` to ``qrpca``, all you have to do is change the import and declare the device if you have a GPU, and that's it.
