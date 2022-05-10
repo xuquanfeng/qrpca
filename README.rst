@@ -9,9 +9,7 @@ QRPCA
 
  QRPCA  works similarly to sklean.decomposition, but employs a QR-based PCA decomposition and supports CUDA acceleration via torch.
 
-`You can get the docs here! <https://qrpca.readthedocs.io/en/stable/README.html>`_
-
-``qrpca`` is a package that uses singular value decomposition and QR decomposition to perform PCA dimensionality reduction. It takes the two-dimensional matrix data matrix as the input, trains the PCA dimensionality reduction matrix, and reduces the dimension of the test data according to the training data. This method can accelerate the operation with GPU in torch environment. Consequently, this package can be used as a simple toolbox to perform astronomical data cleaning.
+`See documentation here! <https://qrpca.readthedocs.io/en/stable/README.html>`_
 
 How to install ``qrpca``
 ========================
