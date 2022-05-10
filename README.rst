@@ -7,7 +7,7 @@ QRPCA
    :target: https://doi.org/10.5281/zenodo.6417821
 .. image:: https://img.shields.io/badge/build-passing-successw
 
-*A Python package for QR based PCA decomposition with CUDA acceleration via torch.*
+* QRPCA  works similarly to sklean.decomposition, but employs a QR-based PCA decomposition and supports CUDA acceleration via torch.*
 
 `You can get the docs here! <https://qrpca.readthedocs.io/en/stable/README.html>`_
 
