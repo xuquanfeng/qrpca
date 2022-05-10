@@ -62,12 +62,8 @@ You can set the parameter ``n_components`` to a value between 0 and 1 to execute
     demo_svdpca = pca.fit_transform(demo_data)
     print(demo_svdpca)
 
-
-Why using ``qrpca``
-===================
-
 ==========================
-Similar to sklearn
+Comparision with sklearn
 ==========================
 
 The methods and usage of ``qrpca`` are almost identical to those of ``sklearn.decomposition.PCA``. If you want to switch from ``sklearn`` to ``qrpca``, all you have to do is change the import and declare the device if you have a GPU, and that's it.
