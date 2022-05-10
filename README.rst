@@ -30,7 +30,7 @@ If you download the repository, you can also install it in the ``QRPCA`` directo
 
 You can access it by clicking on `Github-QRPCA <https://github.com/xuquanfeng/qrpca>`_
 
-How to use ``qrpca``
+Usage
 ====================
 
 Here is a demo for the use of `qrpca`.
