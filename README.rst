@@ -7,7 +7,7 @@ QRPCA
    :target: https://doi.org/10.5281/zenodo.6417821
 .. image:: https://img.shields.io/badge/build-passing-successw
 
- QRPCA  works similarly to sklean.decomposition, but employs a QR-based PCA decomposition and supports CUDA acceleration via torch.
+ *QRPCA  works similarly to sklean.decomposition, but employs a QR-based PCA decomposition and supports CUDA acceleration via torch.*
 
 `See documentation here! <https://qrpca.readthedocs.io/en/stable/README.html>`_
 
