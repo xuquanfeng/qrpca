@@ -136,7 +136,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 References
 ==========
 
-- Sharma, Alok and Paliwal, Kuldip K. and Imoto, Seiya and Miyano, Satoru 2013, International Journal of Machine Learning and Cybernetics, 4, 6, doi: 10.1007/s13042-012-0131-7
+- Sharma, Alok and Paliwal, Kuldip K. and Imoto, Seiya and Miyano, Satoru 2013, International Journal of Machine Learning and Cybernetics, 4, 6, doi: `10.1007/s13042-012-0131-7 <https://link.springer.com/article/10.1007/s13042-012-0131-7>`_
 
 
 Citing ``qrpca``
