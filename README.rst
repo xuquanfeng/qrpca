@@ -20,7 +20,7 @@ The ``qrpca`` can be installed by the PyPI and pip:
 
    pip install qrpca
 
-If you download the repository, you can also install it in the ``QRPCA`` directory:
+If you download the repository, you can also install it in the ``qrpca`` directory:
 
 ::
 
@@ -28,7 +28,7 @@ If you download the repository, you can also install it in the ``QRPCA`` directo
    cd qrpca
    python setup.py install
 
-You can access it by clicking on `Github-QRPCA <https://github.com/xuquanfeng/qrpca>`_
+You can access it by clicking on `Github-qrpca <https://github.com/xuquanfeng/qrpca>`_
 
 Usage
 ====================
