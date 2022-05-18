@@ -44,15 +44,15 @@ You can set the parameter ``n_components`` to a value between 0 and 1 to execute
 
     import torch
     import numpy as np
-    from qrpca.decomposition import QRPCA
+    from qrpca.decomposition import qrpca
     
     # Generate the random data
     demo_data = torch.rand(60000,2000)
     n_com = 0.95
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    # QRPCA
-    pca = QRPCA(n_component_ratio=n_com,device=device) # The percentage of information retained.
+    # qrpca
+    pca = qrpca(n_component_ratio=n_com,device=device) # The percentage of information retained.
     # pca = PCA(n_component_ratio=10) # n principal components are reserved.
     demo_qrpca = pca.fit_transform(demo_data)
     print(demo_pca)
@@ -70,10 +70,10 @@ The methods and usage of ``qrpca`` are almost identical to those of ``sklearn.de
 
 And here's an illustration of how minimal the change is when different ``PCA`` is used:
 
-- qrpca.decomposition.QRPCA
+- qrpca.decomposition.qrpca
 ::
 
-    from qrpca.decomposition import QRPCA
+    from qrpca.decomposition import qrpca
     
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     pca = QRPCA(n_component_ratio=n_com,device=device)
