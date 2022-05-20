@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>qrpca &#8212; qrpca 1.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="qrpca" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="qrpca">
+<h1>qrpca<a class="headerlink" href="#qrpca" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="https://pypi.org/project/qrpca/"><img alt="https://img.shields.io/pypi/v/qrpca" src="https://img.shields.io/pypi/v/qrpca" /></a>
+<a class="reference external image-reference" href="https://doi.org/10.5281/zenodo.6555926"><img alt="https://zenodo.org/badge/DOI/10.5281/zenodo.6555926.svg" src="https://zenodo.org/badge/DOI/10.5281/zenodo.6555926.svg" /></a>
+</section>
+<section id="how-to-install-qrpca">
+<h1>How to install <code class="docutils literal notranslate"><span class="pre">qrpca</span></code><a class="headerlink" href="#how-to-install-qrpca" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">qrpca</span></code> can be installed by the PyPI and pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">qrpca</span>
+</pre></div>
+</div>
+<p>If you download the repository, you can also install it in the <code class="docutils literal notranslate"><span class="pre">qrpca</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">xuquanfeng</span><span class="o">/</span><span class="n">qrpca</span>
+<span class="n">cd</span> <span class="n">qrpca</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>You can access it by clicking on <a class="reference external" href="https://github.com/xuquanfeng/qrpca">Github-qrpca</a></p>
+</section>
+<section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<p>Here is a demo for the use of <cite>qrpca</cite>.</p>
+<p>The following are the results of retaining principal components containing 95% of the information content by principal component analysis.</p>
+<p>You can set the parameter <code class="docutils literal notranslate"><span class="pre">n_components</span></code> to a value between 0 and 1 to execute the PCA on the corresponding proportion of the entire data, or set it to an integer number to reserve the <code class="docutils literal notranslate"><span class="pre">n_omponents</span></code> components.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qrpca.decomposition</span> <span class="kn">import</span> <span class="n">qrpca</span>
+<span class="kn">from</span> <span class="nn">qrpca.decomposition</span> <span class="kn">import</span> <span class="n">svdpca</span>
+
+<span class="c1"># Generate the random data</span>
+<span class="n">demo_data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">n_com</span> <span class="o">=</span> <span class="mf">0.95</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="c1"># qrpca</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">qrpca</span><span class="p">(</span><span class="n">n_component_ratio</span><span class="o">=</span><span class="n">n_com</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span> <span class="c1"># The percentage of information retained.</span>
+<span class="c1"># pca = qrpca(n_component_ratio=10,device=device) # n principal components are reserved.</span>
+<span class="n">demo_qrpca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">demo_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo_pca</span><span class="p">)</span>
+
+<span class="c1"># svdpca</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">svdpca</span><span class="p">(</span><span class="n">n_component_ratio</span><span class="o">=</span><span class="n">n_com</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">demo_svdpca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">demo_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">demo_svdpca</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="comparision-with-sklearn">
+<h2>Comparision with sklearn<a class="headerlink" href="#comparision-with-sklearn" title="Permalink to this headline">¶</a></h2>
+<p>The methods and usage of <code class="docutils literal notranslate"><span class="pre">qrpca</span></code> are almost identical to those of <code class="docutils literal notranslate"><span class="pre">sklearn.decomposition.PCA</span></code>. If you want to switch from <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> to <code class="docutils literal notranslate"><span class="pre">qrpca</span></code>, all you have to do is change the import and declare the device if you have a GPU, and that’s it.</p>
+<p>And here’s an illustration of how minimal the change is when different <code class="docutils literal notranslate"><span class="pre">PCA</span></code> is used:</p>
+<ul class="simple">
+<li><p>qrpca.decomposition.qrpca</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qrpca.decomposition</span> <span class="kn">import</span> <span class="n">qrpca</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">qrpca</span><span class="p">(</span><span class="n">n_component_ratio</span><span class="o">=</span><span class="n">n_com</span><span class="p">,</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">demo_qrpca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">demo_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>qrpca.decomposition.svdpca</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qrpca.decomposition</span> <span class="kn">import</span> <span class="n">svdpca</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">svdpca</span><span class="p">(</span><span class="n">n_component_ratio</span><span class="o">=</span><span class="n">n_com</span><span class="p">)</span>
+<span class="n">demo_svdpca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">demo_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>sklearn.decomposition.PCA</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="n">n_com</span><span class="p">)</span>
+<span class="n">demo_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">demo_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-benchmark-sklearn">
+<h2>Performance benchmark sklearn<a class="headerlink" href="#performance-benchmark-sklearn" title="Permalink to this headline">¶</a></h2>
+<p>With the acceleration of GPU computation, the speed of both QR decomposition and singular value decomposition in <code class="docutils literal notranslate"><span class="pre">qrpca</span></code> is much higher than that in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code></p>
+<p>We run the different PCA methods on data with different numbers of rows and columns, and then we compare their PCA degradation times and plotted the distribution of the times. Here are the two plots.</p>
+<p><strong>Comparison of PCA degradation time with different number of rows and different methods for the case of 1000 columns.</strong></p>
+<img alt="https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/result_1000.png" src="https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/result_1000.png" />
+<p><strong>Comparison of PCA reduction time with different number of columns and different methods for the case of 30000 rows.</strong></p>
+<img alt="https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/3w_18_result.png" src="https://github.com/xuquanfeng/qrpca/blob/v1.4.4/qrpca_test/3w_18_result.png" />
+<p>We can see from the above two facts that <code class="docutils literal notranslate"><span class="pre">qrpca</span></code> may considerably cut program run time by using GPU acceleration, while also having a very cheap migration cost and a guaranteed impact.</p>
+</section>
+</section>
+<section id="requirements">
+<h1>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>numpy&gt;=1.21.1</p></li>
+<li><p>pandas&gt;=1.3.5</p></li>
+<li><p>torch&gt;=1.8.1</p></li>
+<li><p>torchvision&gt;=0.8.0</p></li>
+<li><p>cudatoolkit&gt;=0.7.1</p></li>
+<li><p>scikit-learn&gt;=1.0.2</p></li>
+</ul>
+</section>
+<section id="copyright-license">
+<h1>Copyright &amp; License<a class="headerlink" href="#copyright-license" title="Permalink to this headline">¶</a></h1>
+<p>2022 Xu Quanfeng (<a class="reference external" href="mailto:xuquanfeng&#37;&#52;&#48;shao&#46;ac&#46;cn">xuquanfeng<span>&#64;</span>shao<span>&#46;</span>ac<span>&#46;</span>cn</a>) &amp; Rafael S. de Souza (<a class="reference external" href="mailto:drsouza&#37;&#52;&#48;shao&#46;ac&#46;cn">drsouza<span>&#64;</span>shao<span>&#46;</span>ac<span>&#46;</span>cn</a>) &amp; Shen Shiyin (<a class="reference external" href="mailto:ssy&#37;&#52;&#48;shao&#46;ac&#46;cn">ssy<span>&#64;</span>shao<span>&#46;</span>ac<span>&#46;</span>cn</a>) &amp; Peng Chen (<a class="reference external" href="mailto:pengchzn&#37;&#52;&#48;gmail&#46;com">pengchzn<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</p>
+</section>
+<section id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Sharma, Alok and Paliwal, Kuldip K. and Imoto, Seiya and Miyano, Satoru 2013, International Journal of Machine Learning and Cybernetics, 4, 6, doi: <a class="reference external" href="https://link.springer.com/article/10.1007/s13042-012-0131-7">10.1007/s13042-012-0131-7</a></p></li>
+</ul>
+</section>
+<section id="citing-qrpca">
+<h1>Citing <code class="docutils literal notranslate"><span class="pre">qrpca</span></code><a class="headerlink" href="#citing-qrpca" title="Permalink to this headline">¶</a></h1>
+<p>If you want to cite <code class="docutils literal notranslate"><span class="pre">qrpca</span></code>, please use the following citations.</p>
+<p>Software Citation: Xu Quanfeng, &amp; Rafael S. de Souza. (2022). PCA algorithm of QR accelerated SVD decomposition (1.5). Zenodo. <a class="reference external" href="https://doi.org/10.5281/zenodo.6555926">https://doi.org/10.5281/zenodo.6555926</a></p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">qrpca</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">qrpca</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#how-to-install-qrpca">How to install <code class="docutils literal notranslate"><span class="pre">qrpca</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#comparision-with-sklearn">Comparision with sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#performance-benchmark-sklearn">Performance benchmark sklearn</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#copyright-license">Copyright &amp; License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#citing-qrpca">Citing <code class="docutils literal notranslate"><span class="pre">qrpca</span></code></a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter"><cite>qrpca</cite></a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Xu Quanfeng & Rafael S. de Souza & Shen Shiyin & Peng Chen.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/README.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
