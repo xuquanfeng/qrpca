@@ -145,6 +145,10 @@ class qrpca(object):
         U, s, _, q = self._fit(x)
         x_compress = torch.matmul(U[:, :self.n_components],torch.diag(s[:self.n_components]))
         X_compressed = torch.matmul(q,x_compress)
+        if "cuda" in str(self.device):
+            X_compressed = X_compressed.cpu().numpy() 
+        else:
+            X_compressed = X_compressed.numpy()
         return X_compressed
 
     def transform(self,y):
@@ -171,7 +175,11 @@ class qrpca(object):
         q ,r = torch.linalg.qr(y_centre)
         y_compress=torch.matmul(r,torch.linalg.inv(self.__Vt)[:,:self.n_components])
         del y_centre,r,y  #del variable and release memory
-        y_compressed = torch.matmul(q,y_compress)
+        y_compressed = torch.matmul(q,y_compress)        
+        if "cuda" in str(self.device):
+            y_compressed = y_compressed.cpu().numpy() 
+        else:
+            y_compressed = y_compressed.numpy()
         return y_compressed
 
 class svdpca(object):
@@ -273,7 +281,11 @@ class svdpca(object):
         This method returns a Fortran-ordered array.
         """
         U, s, _ = self._fit(x)
-        x_compressed = torch.matmul(U[:, :self.n_components], torch.diag(s[:self.n_components]))
+        x_compressed = torch.matmul(U[:, :self.n_components], torch.diag(s[:self.n_components]))        
+        if "cuda" in str(self.device):
+            x_compressed = x_compressed.cpu().numpy() 
+        else:
+            x_compressed = x_compressed.numpy()
         return x_compressed
 
     def transform(self, y):
@@ -299,4 +311,8 @@ class svdpca(object):
         y_centre = y-torch.mean(y, axis=0)
         y_compressed=torch.matmul(y_centre,torch.linalg.inv(self.__Vt)[:,:self.n_components])
         del y_centre  # del variable and release memory
+        if "cuda" in str(self.device):
+            y_compressed = y_compressed.cpu().numpy() 
+        else:
+            y_compressed = y_compressed.numpy()
         return y_compressed
