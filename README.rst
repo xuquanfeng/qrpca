@@ -145,20 +145,22 @@ Citing ``qrpca``
 
 If you want to cite ``qrpca``, please use the following citations.
 
-@article{souza_qrpca_2022,
-	title = {qrpca: {A} package for fast principal component analysis with {GPU} acceleration},
-	volume = {41},
-	copyright = {CC0 1.0 Universal Public Domain Dedication},
-	issn = {2213-1337},
-	url = {https://www.sciencedirect.com/science/article/pii/S221313372200052X},
-	doi = {https://doi.org/10.1016/j.ascom.2022.100633},
-	abstract = {We present qrpca, a fast and scalable QR-decomposition principal component analysis package. The software, written in both R and python languages, makes use of torch for internal matrix computations, and enables GPU acceleration, when available. qrpca provides similar functionalities to prcomp (R) and sklearn (python) packages respectively. A benchmark test shows that qrpca can achieve computational speeds 10–20 × faster for large dimensional matrices than default implementations, and is at least twice as fast for a standard decomposition of spectral data cubes. The qrpca source code is made freely available to the community.},
-	journal = {Astronomy and Computing},
-	author = {Souza, R. S. de and Quanfeng, X. and Shen, S. and Peng, C. and Mu, Z.},
-	year = {2022},
-	keywords = {Astroinformatics, GPU computing, Principal component analysis},
-	pages = {100633},
-}
+::
+
+	@article{souza_qrpca_2022,
+		title = {qrpca: {A} package for fast principal component analysis with {GPU} acceleration},
+		volume = {41},
+		copyright = {CC0 1.0 Universal Public Domain Dedication},
+		issn = {2213-1337},
+		url = {https://www.sciencedirect.com/science/article/pii/S221313372200052X},
+		doi = {https://doi.org/10.1016/j.ascom.2022.100633},
+		abstract = {We present qrpca, a fast and scalable QR-decomposition principal component analysis package. The software, written in both R and python languages, makes use of torch for internal matrix computations, and enables GPU acceleration, when available. qrpca provides similar functionalities to prcomp (R) and sklearn (python) packages respectively. A benchmark test shows that qrpca can achieve computational speeds 10–20 × faster for large dimensional matrices than default implementations, and is at least twice as fast for a standard decomposition of spectral data cubes. The qrpca source code is made freely available to the community.},
+		journal = {Astronomy and Computing},
+		author = {Souza, R. S. de and Quanfeng, X. and Shen, S. and Peng, C. and Mu, Z.},
+		year = {2022},
+		keywords = {Astroinformatics, GPU computing, Principal component analysis},
+		pages = {100633},
+	}
 
 Or
 
